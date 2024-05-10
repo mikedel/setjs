@@ -9,24 +9,25 @@ const Icon = ({ color, shape, shade }) => {
 		borderColor: color,
 		borderLeft: shape === 'triangle' ? '50px solid transparent' : 'none',
 		borderRight: shape === 'triangle' ? '50px solid transparent' : 'none',
-		borderBottom: shape === 'triangle' ? '5px solid {color}' : 'none',
+		borderBottom: shape === 'triangle' ? '5px solid ${color}' : 'none',
+		borderRadius: shape === 'oval' ? '50%' : '0px',
 	}
 		
+	const className = `${color} ${shade} ${shape}`;
 	return (
-		<div data-color={color} data-shape={shape} data-shade={shade} style={{ style }}>
-			{shape === 'oval' && <div className="oval"></div>}
-			{shape === 'square' && <div className="square"></div>}
-			{shape === 'triangle' && <div className="triangle"></div>}
+		<div className={className} style={style}>
 		</div>
 	);
 }
 
-const Card = ({ count, icon }) => {
+const Card = ({ color, shape, shade, number}) => {
+	let icons = []
+	for (let i = 0; i < number; i++) {
+		icons.push(<Icon color={color} shape={shape} shade={shade} />);
+	}
 	return (
-		<div data-count={count}>
-			{Array.from({ length: count }).map((_, i) => (
-				<Icon {...icon} />
-			))}
+		<div className="card">
+			{icons}
 		</div>
 	);
 }

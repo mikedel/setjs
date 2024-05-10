@@ -6,7 +6,7 @@ export default function Home() {
   var cards = [];
   const colors = ["red", "green", "blue"];
   const shapes = ["oval", "square", "triangle"];
-  const shades = ["solid", "gradient", "outlined"];
+  const shades = ["solid", "gradient", "empty"];
   for (let i = 1; i <= 3; i++) {
     for (let j = 1; j <= 3; j++) {
       for (let k=1; k<=3; k++) {
@@ -16,12 +16,24 @@ export default function Home() {
       }
     }
   }
+  const style = `<style>
+    .triangle {
+      width: 300px;
+      height: 300px;
+      background-image:
+        linear-gradient(to bottom right, transparent 50%, red 90%),
+        linear-gradient(to bottom left, transparent 50%, red 90%);
+      background-size: 50% 100%;
+      background-repeat: no-repeat;
+      background-position: left, right;
+    }
+    </style>`;
   console.log(cards);
   // return a grid of cards
   // const card_grid = cards.map((card) => {
   //   <Card color={colors[card[0]]} shape={shapes[card[1]]} shade={shades[card[2]]} number={card[3]} />;
   // });
-  const card_grid = cards.map((card) => {
+  const card_grid = cards.map((card, _) => {
     return <Card color={colors[card[0]-1]} shape={shapes[card[1]-1]} shade={shades[card[2]-1]} number={card[3]} />;
   });
   console.log(card_grid);
