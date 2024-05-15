@@ -7,10 +7,14 @@ const Icon = ({ color, shape, shade }) => {
 		height: shape === 'triangle' ? '0px' : '100px',
 		color: color,
 		borderColor: color,
-		borderLeft: shape === 'triangle' ? '50px solid transparent' : 'none',
-		borderRight: shape === 'triangle' ? '50px solid transparent' : 'none',
-		borderBottom: shape === 'triangle' ? '5px solid ${color}' : 'none',
+		backgroundColor: shade === 'solid' ? color : 'white',
+		borderLeft: shape === 'triangle' ? '50px solid transparent' : '3px solid ' + color,
+		borderRight: shape === 'triangle' ? '50px solid transparent' : '3px solid ' + color,
+		borderBottom: shape === 'triangle' ? '100px solid ' + color : '3px solid ' + color,
+		borderTop: shape === 'triangle' ? '0px' : '3px solid ' + color,
+		borderWidth: shape === 'triangle' ? '50px' : '3px',
 		borderRadius: shape === 'oval' ? '50%' : '0px',
+		marginBottom: '10px',
 	}
 		
 	const className = `${color} ${shade} ${shape}`;
@@ -25,8 +29,18 @@ const Card = ({ color, shape, shade, number}) => {
 	for (let i = 0; i < number; i++) {
 		icons.push(<Icon color={color} shape={shape} shade={shade} />);
 	}
+	const style = {
+		backgroundColor: 'white',
+		borderRadius: '10px',
+		padding: '10px',
+		margin: '10px',
+		border: '1px solid black',
+		height: '350px',
+		width: '120px',
+		display: 'inline-block',
+	}
 	return (
-		<div className="card">
+		<div className="card" style={style}>
 			{icons}
 		</div>
 	);
