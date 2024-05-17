@@ -2,25 +2,35 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Icon = ({ color, shape, shade }) => {
-	const style = {
-		width: shape === 'triangle' ? '0px' : '100px',
-		height: shape === 'triangle' ? '0px' : '100px',
+	var style = {
+		width: '100px',
+		height: '100px',
 		color: color,
 		borderColor: color,
-		backgroundColor: shade === 'solid' ? color : 'white',
-		borderLeft: shape === 'triangle' ? '50px solid transparent' : '3px solid ' + color,
-		borderRight: shape === 'triangle' ? '50px solid transparent' : '3px solid ' + color,
-		borderBottom: shape === 'triangle' ? '100px solid ' + color : '3px solid ' + color,
-		borderTop: shape === 'triangle' ? '0px' : '3px solid ' + color,
-		borderWidth: shape === 'triangle' ? '50px' : '3px',
-		borderRadius: shape === 'oval' ? '50%' : '0px',
+		border: '3px solid ' + color,
 		marginBottom: '10px',
+	}
+	// shape
+	if (shape === 'oval') {
+		style.borderRadius = '50%';
+	}
+	else if (shape === 'triangle') {
+		style.clipPath = 'polygon(0% 100%, 50% 0%, 100% 100%)';
+	}	
+	// shade
+	if (shade === 'striped') {
+		style.background = `repeating-linear-gradient(90deg, white 5px, ${color} 10px, white 15px)`;
+	}
+	else if (shade === 'gradient') {
+		style.background = `linear-gradient(${color}, white)`;
+	}
+	else {
+		style.backgroundColor = color;
 	}
 		
 	const className = `${color} ${shade} ${shape}`;
 	return (
-		<div className={className} style={style}>
-		</div>
+		<div className={className} style={style}></div>
 	);
 }
 
